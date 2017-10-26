@@ -1,28 +1,24 @@
 package SimpleDotCom;
 
+import java.util.ArrayList;
+
 public class SimpleDot {
-	private int[] locations;
-	private int count;
+	private ArrayList<Integer> locations;
 	
 	public SimpleDot() {
-		count = 0;
 		locations = null;
 	}
-	public void setLocationCells(int[] locations) {
+	public void setLocationCells(ArrayList<Integer> locations) {
 		this.locations = locations;
 	}
 	
 	public String checkYourSelf(String guess) {
-		int num = Integer.parseInt(guess);
 		String result = "miss";
-		for(int i : locations) {
-			if(i == num) {
-				count++;
-				result = "hit";
-				break;
-			}
+		if(locations.contains(Integer.parseInt(guess))) {
+			result = "hit";
+			locations.remove((Object)Integer.parseInt(guess));
 		}
-		if(count == locations.length) {
+		if(locations.isEmpty()) {
 			result = "kill";
 		}
 		return result;
